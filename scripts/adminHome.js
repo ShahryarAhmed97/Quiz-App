@@ -11,14 +11,81 @@ var config = {
 
 
 
+function loadFun(){
+alert('kbjbkj')
+    var quizesTable=document.getElementById('quizesTable');
+    firebase.database().ref('allQuizes/')
+    .once('value',(data)=>{
+        var allQuizs=data.val();
+
+            for(var key in allQuizs){
+        quizesTable.innerHTML+=
+        `
+        <tr>
+            <td style="font-size:1.5em;">
+            ${key}
+
+            </td>
+        </tr>
+        
+
+        `
+        for(var key2 in allQuizs[key]){
+            quizesTable.innerHTML+=
+            `
+        <tr>
+            <td>
+                <button onclick='quizTitleFun("${key}","${key2}")'>${key2}</button>
+            </td>
+        </tr>
+        `
+
+        }
+
+
+        
+    }
+    })
+}
 
 
 
 document.getElementById('hideDiv').style.display='none'
 
 
+function quizTitleFun(pkey,ckey){
+    console.log(pkey,ckey)
+var quizInfo=document.getElementById('quizInfo');
+quizInfo.innerHTML=""
+    firebase.database().ref(`allQuizes/${pkey}/${ckey}/`)
+    .once('value',(data)=>{
+        var quizObj=data.val();
+        // for(var key in quizObj){
+quizInfo.innerHTML+=
+            `
+            <table>
+            <tr> <th>Quiz Name</th><td> ${quizObj.quizName}</td>  </tr>
+            <tr>  <th>Quiz Title</th><td> ${quizObj.quizTitle}</td>  </tr>
+            <tr> <th>Quiz Details</th><td>${quizObj.quizDetails} </td>  </tr>
+            <tr> <th>Total Marks</th><td> ${quizObj.ttlMarks}</td>  </tr>
+            <tr> <th>Total Ques</th><td> ${quizObj.ttlQues}</td>  </tr>
+            <tr><th>Total Time</th> <td>${quizObj.ttlTime} </td>  </tr>
+            <tr> <th>Passing Marks</th><td>${quizObj.passMarks} </td>  </tr>
+
+            </table>
+            `
+        // }
+    })
+
+
+}
+
+
 function showDiv(){
     document.getElementById('hideDiv').style.display='block'
+    document.getElementById('newQuizId').style.display='none'
+    document.getElementById('qTableDiv').style.display='none'
+
 
 }
 
@@ -47,7 +114,7 @@ let newQuizObj={
         .then((success)=>{
             alert('New Quiz is Created Successfully !!');
             document.getElementById('hideDiv').style.display='none'
-
+location.reload();
 
         })
         .catch((error)=>{
