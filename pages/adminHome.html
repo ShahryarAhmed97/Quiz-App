@@ -39,7 +39,25 @@
                     </div>
                 </div>
             </nav>
-          
+
+
+<!-- div to show all Ques -->
+            <div id="allQuesDiv">
+                <div style="text-align:right">
+                    <button class="btn btn-danger" onclick="location.reload()"> Back To Min Menu</button>
+                </div>
+
+                <div class="col-md-6 col-md-offset-3" id="showAllQuesDiv">
+
+                </div>
+
+            </div>
+
+
+
+
+            <div id="superMainDiv">
+
             <div class="col-md-12">
                     <div class="col-md-8 col-md-offset-2 text-center heading">
                             <h2>Quiz App Admin</h2>
@@ -62,12 +80,14 @@
                                         <span class="input-group-addon"><i class="	far fa-edit"></i></span>
                                         <input id="quizTitle" type="text" class="form-control" name="quizTitle" placeholder="Quiz Title">
                                     </div>
+                                    <br>
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="	far fa-edit"></i></span>
+                                        <input id="quizKey" type="text" class="form-control" name="quizKey" placeholder="Enter Unique Quiz Key ..">
+                                    </div>
                                    
                                     <br>
-        
-                                  
-        
-                                    <div class="input-group">
+                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="	far fa-edit"></i></span>
                                             <input id="ttlTime" type="number" class="form-control" name="ttlTime" placeholder="Enter Total Time">
                                         </div>
@@ -197,23 +217,12 @@
 
 
                             </div>
-                     
-
-
-
-
-
-
-
-                      
-
-
-            
-
-
-                        
+                            
 
             </div>
+
+
+        </div>
     <script src="../scripts/adminHome.js"></script>
 </body>
 </html>

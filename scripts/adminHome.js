@@ -67,6 +67,8 @@ quizInfo.innerHTML+=
             <table>
             <tr> <th>Quiz Name</th><td> ${quizObj.quizName}</td>  </tr>
             <tr>  <th>Quiz Title</th><td> ${quizObj.quizTitle}</td>  </tr>
+            <tr>  <th>Quiz Key</th><td> ${quizObj.quizKey}</td>  </tr>
+
             <tr> <th>Quiz Details</th><td>${quizObj.quizDetails} </td>  </tr>
             <tr> <th>Total Marks</th><td> ${quizObj.ttlMarks}</td>  </tr>
             <tr> <th>Total Ques</th><td> ${quizObj.ttlQues}</td>  </tr>
@@ -74,6 +76,9 @@ quizInfo.innerHTML+=
             <tr> <th>Passing Marks</th><td>${quizObj.passMarks} </td>  </tr>
 
             </table>
+            <br>
+            <br>
+            <button class='btn btn-primary' onclick='seeAllQuiz("${pkey}","${ckey}")'>See All Ques</button>
             </div>
             
             
@@ -88,6 +93,53 @@ quizInfo.innerHTML+=
 
 
 }
+
+
+function seeAllQuiz(pkey,ckey){
+    document.getElementById('superMainDiv').style.display="none"
+    document.getElementById('allQuesDiv').style.display="block"
+var showAllQuesDiv=document.getElementById('showAllQuesDiv'); 
+
+firebase.database().ref(`allQuizes/${pkey}/${ckey}/allQues/`)
+.once('value',(data)=>{
+    var allQuesObj=data.val();
+
+    showAllQuesDiv.innerHTML+=
+
+    `
+    <div>
+    <h3>${pkey} --->  ${ckey}</h3>
+    </div>
+
+    `
+    for(var key in allQuesObj){
+
+        showAllQuesDiv.innerHTML+=
+        `
+       
+        <div>
+        
+        
+        <p>${allQuesObj[key].ques}</p>
+        <p>${allQuesObj[key].ansReal}</p>
+        <p>${allQuesObj[key].op1}</p>
+        <p>${allQuesObj[key].op2}</p>
+        <p>${allQuesObj[key].op3}</p>
+        <p>${allQuesObj[key].op4}</p>
+
+        
+        
+        </div>
+        
+        <br>
+        `
+    }
+})
+
+}
+
+
+
 
 function showAddQues(){
     document.getElementById('addQuesForm').style.display='block'
@@ -119,10 +171,11 @@ function createQuizFun(){
     var passMarks=document.getElementById('passMarks').value;
 
 
-    if(quizName!='' && quizTitle!='' && quizDetails!=''  && ttlTime!='' && ttlQues!='' && ttlMarks!='' && passMarks!='' && quizName!=undefined && quizTitle!=undefined && quizDetails!=undefined && ttlTime!=undefined && ttlQues!=undefined && ttlMarks!=undefined && passMarks!=undefined){
+    if(quizName!='' && quizTitle!='' && quizKey!='' && quizDetails!=''  && ttlTime!='' && ttlQues!='' && ttlMarks!='' && passMarks!='' && quizName!=undefined && quizTitle!=undefined && quizKey!=undefined && quizDetails!=undefined && ttlTime!=undefined && ttlQues!=undefined && ttlMarks!=undefined && passMarks!=undefined){
 let newQuizObj={
     quizName,
     quizTitle,
+    quizKey,
     ttlTime,
     ttlQues,
     ttlMarks,
@@ -181,7 +234,14 @@ let quesObj={
 firebase.database().ref(`allQuizes/${quizName}/${quizTitle}/allQues/`)
 .push(quesObj)
 .then((success)=>{
-location.reload();
+  document.getElementById('qName').value='';
+document.getElementById('qTitle').value='';
+document.getElementById('ques').value='';
+document.getElementById('op1').value='';
+document.getElementById('op2').value='';
+document.getElementById('op3').value='';
+document.getElementById('op4').value='';
+document.getElementById('ansReal').value='';
 }) 
 .catch((error)=>{
 alert(error)
