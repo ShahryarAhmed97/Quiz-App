@@ -49,18 +49,150 @@
                             <button class="btn btn-success" id="newQuizId" onclick="showDiv()">Create New Quiz</button>
                         </div>
 
+
+                        <div id="hideDiv" >
+                    
+                                <div class="col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="far fa-edit"></i></span>
+                                        <input id="quizName" type="text" class="form-control" name="quizName" placeholder="Quiz Name">
+                                    </div>
+                                    <br>
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="	far fa-edit"></i></span>
+                                        <input id="quizTitle" type="text" class="form-control" name="quizTitle" placeholder="Quiz Title">
+                                    </div>
+                                   
+                                    <br>
+        
+                                  
+        
+                                    <div class="input-group">
+                                            <span class="input-group-addon"><i class="	far fa-edit"></i></span>
+                                            <input id="ttlTime" type="number" class="form-control" name="ttlTime" placeholder="Enter Total Time">
+                                        </div>
+        
+                                        <div class="input-group">
+                                                <span class="input-group-addon"><i class="	far fa-edit"></i></span>
+                                                <input id="ttlQues" type="number" class="form-control" name="ttlQues" placeholder="Enter Total No Of Questions">
+                                            </div>
+        
+        
+                                            <div class="input-group">
+                                                    <span class="input-group-addon"><i class="	far fa-edit"></i></span>
+                                                    <input id="ttlMarks" type="number" class="form-control" name="ttlMarks" placeholder="Enter Total Marks">
+                                                </div>
+        
+                                                <div class="input-group">
+                                                        <span class="input-group-addon"><i class="	far fa-edit"></i></span>
+                                                        <input id="passMarks" type="number" class="form-control" name="passMarks" placeholder="Enter Passing Marks">
+                                                    </div>
+        
+                                                    <br>
+                                                    <div class="input-group">
+                                                            <span class="input-group-addon"><i class="far fa-edit"></i></span>
+                                                            <textarea name="quizDetails" id="quizDetails" cols="80" rows="6" placeholder="Enter Quix Description here ..!">
+                                                            </textarea>
+                                                            </div>
+                            
+                            
+                                                        <br>
+        
+                                            
+                                    
+                                </div>
+        
+        
+        
+        
+        
+                                    <div class="col-md-12 col-sm-12 col-xs-12 text-center">
+                                        <button class="btn btn-success" id="createQuiz"  onclick="createQuizFun()">Create Quiz</button>
+                                        <button class="btn btn-danger" id="cancelQuiz"  onclick="cancelQuiz()">Cancel</button>
+        
+                                    </div>
+                                   
+                                  </div>
+
                         <div class="col-md-3" id="qTableDiv" >
                                 <table id="quizesTable"  class="col-md-12">
                 
                                 </table>
                                                
                             </div>
+                          
 
-                            <div class="col-md-9" id="quizInfo">
-                                <div>
+                            <div class="col-md-9 " id="quizInfoMain">
 
-                                    <button class="btn btn-success" id="addQues" onclick="addQues()">Add Questions </button>
+                                <div id="quizInfo" class="col-md-6">
+
                                 </div>
+                            
+                                <div  id="addQuizDiv" class="col-md-6">
+                                    <div style="text-align:right" style="margin-top:20px" id="addQuesBtn" >
+
+                                        <button class="btn btn-success" onclick="showAddQues()">Add Questions </button>
+                                    </div>
+
+                                    <div class="col-md-12" style="margin-top:20px" id="addQuesForm">
+                                            <div class="input-group">
+                                                    <span class="input-group-addon"><i class="far fa-edit"></i></span>
+                                                    <input id="qName" type="text" class="form-control" name="qName" placeholder="Quiz Name">
+                                                </div>
+                                                <br>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i class="	far fa-edit"></i></span>
+                                                    <input id="qTitle" type="text" class="form-control" name="qTitle" placeholder="Quiz Title">
+                                                </div>
+                                               
+                                                <br>
+                    
+                                              
+                    
+                                                <div class="input-group">
+                                                        <span class="input-group-addon"><i class="	far fa-edit"></i></span>
+                                                        <input id="ques" type="text" class="form-control" name="ques" placeholder="Enter Question Here">
+                                                    </div>
+                                                    <br>
+                    
+                                                    <div class="input-group">
+                                                            <span class="input-group-addon"><i class="	far fa-edit"></i></span>
+                                                            <input id="op1" type="text" class="form-control" name="op1" placeholder="Enter option 1 here ..">
+                                                        </div>
+                                                        <br>
+                                                        <div class="input-group">
+                                                                <span class="input-group-addon"><i class="	far fa-edit"></i></span>
+                                                                <input id="op2" type="text" class="form-control" name="op2" placeholder="Enter option 2 here">
+                                                            </div>
+                                                            <br>
+                                                            <div class="input-group">
+                                                                    <span class="input-group-addon"><i class="	far fa-edit"></i></span>
+                                                                    <input id="op3" type="text" class="form-control" name="op3" placeholder="Enter option 3 here">
+                                                                </div>
+
+                                                                <br>
+                                                                <div class="input-group">
+                                                                        <span class="input-group-addon"><i class="	far fa-edit"></i></span>
+                                                                        <input id="op4" type="text" class="form-control" name="op4" placeholder="Enter option 4 here">
+                                                                    </div>
+
+                                                                    <br>
+                                                                    <div class="input-group">
+                                                                            <span class="input-group-addon"><i class="	far fa-edit"></i></span>
+                                                                            <input id="ansReal" type="text" class="form-control" name="ansReal" placeholder="Enter Origional Answer here..">
+                                                                        </div>
+                    
+                                           
+                                            <br>
+                                            <div class="col-md-12 col-sm-12 col-xs-12 text-center">
+                                                <button class="btn btn-success" id="submitQuesBtn"  onclick="submitQuesFun()">Submit</button>
+                                                <button class="btn btn-danger" id="hideQuesBtn"  onclick="hideQuesFormFun()">Cancel</button>
+
+                                            </div>
+
+                                </div>
+
+                
 
 
 
@@ -73,69 +205,7 @@
 
 
 
-                       <div id="hideDiv" >
-                    
-                        <div class="col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1">
-                            <div class="input-group">
-                                <span class="input-group-addon"><i class="far fa-edit"></i></span>
-                                <input id="quizName" type="text" class="form-control" name="quizName" placeholder="Quiz Name">
-                            </div>
-                            <br>
-                            <div class="input-group">
-                                <span class="input-group-addon"><i class="	far fa-edit"></i></span>
-                                <input id="quizTitle" type="text" class="form-control" name="quizTitle" placeholder="Quiz Title">
-                            </div>
-                           
-                            <br>
-
-                          
-
-                            <div class="input-group">
-                                    <span class="input-group-addon"><i class="	far fa-edit"></i></span>
-                                    <input id="ttlTime" type="number" class="form-control" name="ttlTime" placeholder="Enter Total Time">
-                                </div>
-
-                                <div class="input-group">
-                                        <span class="input-group-addon"><i class="	far fa-edit"></i></span>
-                                        <input id="ttlQues" type="number" class="form-control" name="ttlQues" placeholder="Enter Total No Of Questions">
-                                    </div>
-
-
-                                    <div class="input-group">
-                                            <span class="input-group-addon"><i class="	far fa-edit"></i></span>
-                                            <input id="ttlMarks" type="number" class="form-control" name="ttlMarks" placeholder="Enter Total Marks">
-                                        </div>
-
-                                        <div class="input-group">
-                                                <span class="input-group-addon"><i class="	far fa-edit"></i></span>
-                                                <input id="passMarks" type="number" class="form-control" name="passMarks" placeholder="Enter Passing Marks">
-                                            </div>
-
-                                            <br>
-                                            <div class="input-group">
-                                                    <span class="input-group-addon"><i class="far fa-edit"></i></span>
-                                                    <textarea name="quizDetails" id="quizDetails" cols="80" rows="6" placeholder="Enter Quix Description here ..!">
-                                                    </textarea>
-                                                    </div>
-                    
-                    
-                                                <br>
-
-                                    
-                            
-                        </div>
-
-
-
-
-
-                            <div class="col-md-12 col-sm-12 col-xs-12 text-center">
-                                <button class="btn btn-success" id="createQuiz"  onclick="createQuizFun()">Create Quiz</button>
-                                <button class="btn btn-danger" id="cancelQuiz"  onclick="cancelQuiz()">Cancel</button>
-
-                            </div>
-                           
-                          </div>
+                      
 
 
             

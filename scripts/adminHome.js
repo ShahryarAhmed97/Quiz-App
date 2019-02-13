@@ -12,7 +12,6 @@ var config = {
 
 
 function loadFun(){
-alert('kbjbkj')
     var quizesTable=document.getElementById('quizesTable');
     firebase.database().ref('allQuizes/')
     .once('value',(data)=>{
@@ -55,6 +54,7 @@ document.getElementById('hideDiv').style.display='none'
 
 function quizTitleFun(pkey,ckey){
     console.log(pkey,ckey)
+    document.getElementById('addQuesBtn').style.display='block'
 var quizInfo=document.getElementById('quizInfo');
 quizInfo.innerHTML=""
     firebase.database().ref(`allQuizes/${pkey}/${ckey}/`)
@@ -63,6 +63,7 @@ quizInfo.innerHTML=""
         // for(var key in quizObj){
 quizInfo.innerHTML+=
             `
+            <div class="col-md-10">
             <table>
             <tr> <th>Quiz Name</th><td> ${quizObj.quizName}</td>  </tr>
             <tr>  <th>Quiz Title</th><td> ${quizObj.quizTitle}</td>  </tr>
@@ -73,6 +74,14 @@ quizInfo.innerHTML+=
             <tr> <th>Passing Marks</th><td>${quizObj.passMarks} </td>  </tr>
 
             </table>
+            </div>
+            
+            
+            <div class="col-md-2" style='margin-top:10px;'>
+            
+
+            
+            </div>
             `
         // }
     })
@@ -80,11 +89,22 @@ quizInfo.innerHTML+=
 
 }
 
+function showAddQues(){
+    document.getElementById('addQuesForm').style.display='block'
+
+}
+
+function hideQuesFormFun(){
+    document.getElementById('addQuesForm').style.display='none'
+
+}
 
 function showDiv(){
     document.getElementById('hideDiv').style.display='block'
     document.getElementById('newQuizId').style.display='none'
     document.getElementById('qTableDiv').style.display='none'
+
+    document.getElementById('quizInfoMain').style.display='none'
 
 
 }
@@ -132,4 +152,45 @@ alert(error.message)
 
 function cancelQuiz(){
     location.reload();
+}
+
+
+
+function submitQuesFun(){
+var quizName=document.getElementById('qName').value;
+var quizTitle=document.getElementById('qTitle').value;
+var ques=document.getElementById('ques').value;
+var op1=document.getElementById('op1').value;
+var op2=document.getElementById('op2').value;
+var op3=document.getElementById('op3').value;
+var op4=document.getElementById('op4').value;
+var ansReal=document.getElementById('ansReal').value;
+
+if(quizName!='' && quizTitle!='' && ques!='' && op1!='' && op2!='' && op3!='' && op4!='' && ansReal!=''  && quizName!=undefined && quizTitle!=undefined && ques!=undefined && op1!=undefined && op2!=undefined && op3!=undefined && op4!=undefined && ansReal!=undefined){
+let quesObj={
+    quizName,
+    quizTitle,
+    ques,
+    op1,
+    op2,
+    op3,
+    op4,
+    ansReal
+}
+
+firebase.database().ref(`allQuizes/${quizName}/${quizTitle}/allQues/`)
+.push(quesObj)
+.then((success)=>{
+location.reload();
+}) 
+.catch((error)=>{
+alert(error)
+})
+
+}
+else{
+    alert('fill the form corrrectly')
+}
+
+
 }
