@@ -4,15 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../styleSheets/startQuiz.css">
+    <title>Document</title>
     <script src="https://www.gstatic.com/firebasejs/5.8.2/firebase.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-
-    <title>Document</title>
 </head>
-<body>
+<body onLoad="loadFun()">
 
         <nav class="navbar navbar-inverse">
                 <div class="container-fluid">
@@ -22,7 +22,7 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand my-color" href="../index.html">Quiz Appk</a>
+                        <a class="navbar-brand my-color" href="../index.html">Quiz App</a>
                     </div>
                     <div class="collapse navbar-collapse" id="myNavbar">
                         <!-- <ul class="nav navbar-nav">
@@ -32,38 +32,16 @@
                             <li><a href="#">Page 3</a></li>
                         </ul> -->
                         <ul class="nav navbar-nav navbar-right">
-                            <li><a href="./signUp.html"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                            <li><a href="#" onclick="logOutFun()"><span class="glyphicon glyphicon-log-out"></span> Log out</a></li>
+                           <!-- <li> <button style="margin-top: 5px;font-size:1.2em;color:white;background-color:#3B5998;" class="btn" onclick="fbLogFun()"> Sign up from Facebook </button></li> -->
+
                             <!-- <li><a href="./signIn.html"><span class="glyphicon glyphicon-log-in"></span> Login</a></li> -->
                         </ul>
                     </div>
                 </div>
             </nav>
-            <div class="col-md-8 col-md-offset-2 text-center heading">
-                <h2>Admin Sign in</h2>
-            </div>
-            <div class="col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1">
-                <div class="input-group">
-                    <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-                    <input id="email" type="text" class="form-control" name="email" placeholder="Email">
-                </div>
-                <br>
-                <div class="input-group">
-                    <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                    <input id="password" type="password" class="form-control" name="password" placeholder="Password">
-                </div>
-               
-                <br>
-                <div class="col-md-12 col-sm-12 col-xs-12 text-center">
-                    <button class="btn btn-success" id="signIn"  onclick="signInFun()">Sign In</button>
-                </div>
-            
-           
-        
-           
-        
-              
-            </div>
-            
-    <script src="../scripts/adminLogIn.js"></script>
+    
+
+            <script src="../scripts/startQuiz.js"></script>
 </body>
 </html>

@@ -9,6 +9,23 @@ var config = {
   firebase.initializeApp(config);
 
 
+  function logOutFun(){
+
+    firebase.auth().signOut()
+    .then(function() {
+   localStorage.setItem('currentUserId',null)
+
+   localStorage.setItem('fbUser',null)
+    localStorage.setItem('token',null)
+    // localStorage.setItem('fbUser',null);
+
+  
+   location.href="../pages/adminLogIn.html"
+    }).catch(function(error) {
+     alert(error.message)
+    });    
+  }
+  
 
 
 function loadFun(){
