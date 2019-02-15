@@ -10,7 +10,8 @@ var config = {
   firebase.initializeApp(config);
 
 
-
+  
+  
 
 function loadFun(){
   var allQuizesDiv=document.getElementById('allQuizesDiv');
@@ -109,13 +110,36 @@ function showSubQuizDetails(qName,qTitle){
 
 }
 
-
 function startQuiz(qName,qTitle){
+  document.getElementById('hideDiv').style.display='none'
+  document.getElementById('quizKeyDiv').style.display='block'
 
-localStorage.setItem('qName',qName)
-localStorage.setItem('qTitle',qTitle)
+  localStorage.setItem('qName',qName)
+  localStorage.setItem('qTitle',qTitle)
 
-location.href='../pages/startQuiz.html'
+}
+
+function quizKeyFun(){
+
+  var quizKey=document.getElementById('quizKey').value;
+var qName=localStorage.getItem('qName')
+var qTitle=localStorage.getItem('qTitle')
+firebase.database().ref(`allQuizes/${qName}/${qTitle}/`)
+.once('value',(data)=>{
+  var quizObj=data.val();
+
+  if(quizKey==quizObj.quizKey){
+   
+    location.href='../pages/startQuiz.html'
+
+  }
+
+  else{
+    alert('Invalid Quiz Key')
+  }
+})
+
+
   
 }
 

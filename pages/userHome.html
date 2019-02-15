@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
 
 
     <title>User Home</title>
@@ -47,31 +49,56 @@
                     </div>
                 </div>
             </nav>
-           
-    <div  id="headDiv" class="col-md-12" >
-         
-                <h2 id="userHead"></h2>
-    </div>
 
+           
+    <div class="container"  id="quizKeyDiv" style="margin-top:20px" >
+
+            <div class="jumbotron" style="background-color:rgb(216, 216, 238)">
+                    <h3 style='color:rgb(59, 16, 160)'> Enter Quiz Key</h3>
+                            <div class="input-group col-md-8 col-md-offset-2">
+                                    <span class="input-group-addon"><i class="far fa-edit"></i></span>
+                                    <input id="quizKey" type="text" style="font-size:1.2em;padding: 3px;" class="form-control" name="quizKey" placeholder="Enter Unique Quiz Key ..">
+                                </div>
+                                
+                                <br>
+                                <div style="text-align:center">
+
+                                    <button class="btn btn-success" id="createQuiz"  onclick="quizKeyFun()">Submit Key</button>
+                                </div>
+
+                    
+                </div>
+                
+          </div>
+           
+
+            <div id="hideDiv">
+
+                <div  id="headDiv" class="col-md-12" >
+                    
+                    <h2 id="userHead"></h2>
+    </div>
+    
 
             <div id="mainDiv" class="col-md-12">
 
                 <div class="col-md-3" id="allQuizesDiv" style="border:2px solid black; ">
 
                 </div>
-
+                
                 <div class="col-md-3" id="subQuizesDiv" style="border:2px solid black; ">
+
+                    </div>
+                
+
+                    <div class="col-md-6" id="quizDetailsDiv">
 
                 </div>
                 
 
-                <div class="col-md-6" id="quizDetailsDiv">
-
-                </div>
-
-
             </div>
-
+            
+        </div>
       <script src="../scripts/userHome.js"></script>
 </body>
 </html>

@@ -112,6 +112,39 @@ quizInfo.innerHTML+=
 }
 
 
+
+
+function updateQuizFun(pkey,ckey,key)
+{
+    firebase.database().ref(`allQuizes/${pkey}/${ckey}/allQues/${key}`).remove()
+    .then((success)=>{
+        location.reload();
+    })
+    .catch((error)=>{
+console.log(error)
+    })
+
+}
+
+function showUpdateForm(pkey,ckey,key){
+
+    
+
+}
+
+function delQuizFun(pkey,ckey,key)
+{
+    firebase.database().ref(`allQuizes/${pkey}/${ckey}/allQues/${key}`).remove()
+    .then((success)=>{
+        location.reload();
+    })
+    .catch((error)=>{
+console.log(error)
+    })
+
+}
+
+
 function seeAllQuiz(pkey,ckey){
     document.getElementById('superMainDiv').style.display="none"
     document.getElementById('allQuesDiv').style.display="block"
@@ -144,9 +177,10 @@ firebase.database().ref(`allQuizes/${pkey}/${ckey}/allQues/`)
         <p>${allQuesObj[key].op3}</p>
         <p>${allQuesObj[key].op4}</p>
 
-        
-        
-        </div>
+         </div>
+         <br>
+         <button class="btn btn-danger" onclick='delQuizFun("${pkey}","${ckey}","${key}")'>Delete</button>
+         <button class="btn btn-warning" onclick='showUpdateForm("${pkey}","${ckey}","${key}")'>Update</button>
         
         <br>
         `
