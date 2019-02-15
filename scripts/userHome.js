@@ -111,12 +111,27 @@ function showSubQuizDetails(qName,qTitle){
 }
 
 function startQuiz(qName,qTitle){
+  localStorage.setItem('qName',qName)
+  localStorage.setItem('qTitle',qTitle)
+  var userUid=localStorage.getItem('currentUserUid')
+  firebase.database().ref(`allusers/${userUid}/allQuiz/`)
+  .once('value',(data)=>{
+    var preQuizObj=data.val();
+    for(var key in preQuizObj){
+      if(key==qTitle){
+        alert('You have Already given This Quiz')
+        location.href="../pages/userHome.html"
+      }
+    }
+  
+  })
   document.getElementById('hideDiv').style.display='none'
   document.getElementById('quizKeyDiv').style.display='block'
 
-  localStorage.setItem('qName',qName)
-  localStorage.setItem('qTitle',qTitle)
+ 
 
+  
+  
 }
 
 function quizKeyFun(){

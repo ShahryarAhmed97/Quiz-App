@@ -40,7 +40,7 @@ function fbLogFun(){
       }
       
       firebase.database().ref('allusers/'+userUid)
-      .set(userObj)
+      .update(userObj)
       .then((success)=>{
           window.location.href="../pages/userHome.html"
 

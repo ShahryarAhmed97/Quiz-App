@@ -5,30 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-
+<link rel="stylesheet" href="../styleSheets/adminAllUsers.css">
     <script src="https://www.gstatic.com/firebasejs/5.8.2/firebase.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 
-
-    <script>
-
-var config = {
-    apiKey: "AIzaSyC2lA1bqe1ag37VU2WoGvQtrEsf71JqJUQ",
-    authDomain: "quizapp-shary.firebaseapp.com",
-    databaseURL: "https://quizapp-shary.firebaseio.com",
-    projectId: "quizapp-shary",
-    storageBucket: "quizapp-shary.appspot.com",
-    messagingSenderId: "296957949358"
-  };
-  firebase.initializeApp(config);
-
-    
-   
-    </script>
 </head>
-<body>
+<body  onLoad="loadFun()">
+
 
         <nav class="navbar navbar-inverse">
                 <div class="container-fluid">
@@ -38,7 +24,8 @@ var config = {
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand my-color" href="#">Quiz App</a>
+                        <a class="navbar-brand my-color" href="../index.html">Quiz App</a>
+
                     </div>
                     <div class="collapse navbar-collapse" id="myNavbar">
                         <!-- <ul class="nav navbar-nav">
@@ -48,56 +35,38 @@ var config = {
                             <li><a href="#">Page 3</a></li>
                         </ul> -->
                         <ul class="nav navbar-nav navbar-right">
-                            <li><a href="../pages/userHome.html"><span class="glyphicon glyphicon-home"></span> Home</a></li>
-                            <li><a href="#" onclick="logOutFun()"><span class="glyphicon glyphicon-log-out"></span> Log out</a></li>
+                                <li><a href="../pages/adminHome.html" ><span class="glyphicon glyphicon-home"></span> Home</a></li>
 
+                            <li><a href="./adminLogIn.html" onclick="logOutFun()"><span class="glyphicon glyphicon-log-out"></span> Log out</a></li>
                         </ul>
                     </div>
                 </div>
             </nav>
 
 
+            <div class="col-md-12" id="mainDiv">
+
+                <div class="col-md-3" >
+                        <table id="quizesTable"  class="col-md-12">
+                
+                            </table>
+
+                </div>
+                <div class="col-md-1" >
+
+                </div>
+
+                <div class="col-md-6" id="userInfoDiv" >
 
 
-    <div class="col-md-4 col-md-offset-4" style="height:200px;margin-top:120px;text-align: center;box-shadow:0px 0px 20px grey" id="resDiv">
-        
-    </div>
+                </div>
 
-
-    <script>
-    var res=localStorage.getItem('currentUserPrtg');
-    var resDiv=document.getElementById('resDiv');
-   var result= `<h1 style="margin-top:50px;">Result : ${ Math.round(res)} % </h1>`;
-    resDiv.innerHTML=result;
-
-
-
-     
-    function logOutFun(){
-
-firebase.auth().signOut()
-.then(function() {
-localStorage.setItem('currentUserId',null)
-
-localStorage.setItem('fbUser',null)
-localStorage.setItem('token',null)
-localStorage.setItem('qName',null)
-localStorage.setItem('qTitle',null)
-
-location.href="../pages/signUp.html"
-}).catch(function(error) {
-alert(error.message)
-});    
-}
-
-                            
-                      
+            </div>
 
 
 
 
-    
-    </script>
+
+    <script src="../scripts/adminAllUsers.js"></script>
 </body>
-
 </html>

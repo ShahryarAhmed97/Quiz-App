@@ -33,7 +33,9 @@
                             <li><a href="#">Page 3</a></li>
                         </ul> -->
                         <ul class="nav navbar-nav navbar-right">
-                            <li><a href="./signUp.html"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                                <li><a href="../pages/adminAllUsers.html"><span class="glyphicon glyphicon-user"></span>All Users</a></li>
+                                <li><a href="./adminLogIn.html" onclick="logOutFun()"><span class="glyphicon glyphicon-log-out"></span> Log out</a></li>
+
                             <!-- <li><a href="./signIn.html"><span class="glyphicon glyphicon-log-in"></span> Login</a></li> -->
                         </ul>
                     </div>
@@ -47,11 +49,85 @@
                     <button class="btn btn-danger" onclick="location.reload()"> Back To Min Menu</button>
                 </div>
 
-                <div class="col-md-6 col-md-offset-3" id="showAllQuesDiv">
+                <div class="col-md-8" id="showAllQuesDiv">
+
+                </div>
+
+                <div class="col-md-4"  id="updateQuizDiv">
+
+
+                                <div class="col-md-12" style="margin-top:20px" >
+                                        <div class="input-group">
+                                                <span class="input-group-addon"><i class="far fa-edit"></i></span>
+                                                <input id="UPqName" type="text" class="form-control" name="UPqName" placeholder="Quiz Name">
+                                            </div>
+                                            <br>
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="	far fa-edit"></i></span>
+                                                <input id="UPqTitle" type="text" class="form-control" name="UPqTitle" placeholder="Quiz Title">
+                                            </div>
+                                           
+                                            <br>
+                
+                                          
+                
+                                            <div class="input-group">
+                                                    <span class="input-group-addon"><i class="	far fa-edit"></i></span>
+                                                    <input id="UPques" type="text" class="form-control" name="UPques" placeholder="Enter Question Here">
+                                                </div>
+                                                <br>
+                
+                                                <div class="input-group">
+                                                        <span class="input-group-addon"><i class="	far fa-edit"></i></span>
+                                                        <input id="UPop1" type="text" class="form-control" name="UPop1" placeholder="Enter option 1 here ..">
+                                                    </div>
+                                                    <br>
+                                                    <div class="input-group">
+                                                            <span class="input-group-addon"><i class="	far fa-edit"></i></span>
+                                                            <input id="UPop2" type="text" class="form-control" name="UPop2" placeholder="Enter option 2 here">
+                                                        </div>
+                                                        <br>
+                                                        <div class="input-group">
+                                                                <span class="input-group-addon"><i class="	far fa-edit"></i></span>
+                                                                <input id="UPop3" type="text" class="form-control" name="UPop3" placeholder="Enter option 3 here">
+                                                            </div>
+
+                                                            <br>
+                                                            <div class="input-group">
+                                                                    <span class="input-group-addon"><i class="	far fa-edit"></i></span>
+                                                                    <input id="UPop4" type="text" class="form-control" name="UPop4" placeholder="Enter option 4 here">
+                                                                </div>
+
+                                                                <br>
+                                                                <div class="input-group">
+                                                                        <span class="input-group-addon"><i class="	far fa-edit"></i></span>
+                                                                        <input id="UPansReal" type="text" class="form-control" name="UPansReal" placeholder="Enter Origional Answer here..">
+                                                                    </div>
+                
+                                       
+                                        <br>
+                                        <div class="col-md-12 col-sm-12 col-xs-12 text-center">
+                                            <button class="btn btn-success" id="UPsubmitQuesBtn"  onclick="updateQuizFun()">Update</button>
+                                            <button class="btn btn-danger" id="hideQuesBtn"  onclick="UPhideQuesFormFun()">Cancel</button>
+
+                                        </div>
+
+                            </div>
+
+            
+
+
+
+                        </div>
 
                 </div>
 
             </div>
+
+
+
+
+
 
 
 

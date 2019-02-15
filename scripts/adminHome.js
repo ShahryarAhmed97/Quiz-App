@@ -116,26 +116,61 @@ quizInfo.innerHTML+=
 
 function updateQuizFun(pkey,ckey,key)
 {
-    firebase.database().ref(`allQuizes/${pkey}/${ckey}/allQues/${key}`).remove()
+    var  quizName=document.getElementById('UPqName').value;
+var quizTitle=document.getElementById('UPqTitle').value;
+var ques=document.getElementById('UPques').value;
+var op1=document.getElementById('UPop1').value;
+var op2=document.getElementById('UPop2').value;
+var op3=document.getElementById('UPop3').value;
+var op4=document.getElementById('UPop4').value;
+var ansReal=document.getElementById('UPansReal').value;
+
+
+
+if(quizName!='' && quizTitle!='' && ques!='' && op1!='' && op2!='' && op3!='' && op4!='' && ansReal!=''  && quizName!=undefined && quizTitle!=undefined && ques!=undefined && op1!=undefined && op2!=undefined && op3!=undefined && op4!=undefined && ansReal!=undefined){
+    let quesObj={
+        quizName,
+        quizTitle,
+        ques,
+        op1,
+        op2,
+        op3,
+        op4,
+        ansReal
+    }
+    
+    firebase.database().ref(`allQuizes/${pkey}/${ckey}/allQues/${key}`)
+    .update(quesObj)
     .then((success)=>{
+
         location.reload();
     })
     .catch((error)=>{
 console.log(error)
     })
-
-}
-
-function showUpdateForm(pkey,ckey,key){
-
     
 
 }
+}
+document.getElementById('updateQuizDiv').style.display='none'
+
+function showUpdateForm(pkey,ckey,key){
+document.getElementById('updateQuizDiv').style.display='block'
+    
+
+}
+
+function UPhideQuesFormFun(){
+    document.getElementById('updateQuizDiv').style.display='none'
+
+}
+
 
 function delQuizFun(pkey,ckey,key)
 {
     firebase.database().ref(`allQuizes/${pkey}/${ckey}/allQues/${key}`).remove()
     .then((success)=>{
+
         location.reload();
     })
     .catch((error)=>{
@@ -220,6 +255,7 @@ function createQuizFun(){
     var ttlQues=document.getElementById('ttlQues').value;
     var ttlMarks=document.getElementById('ttlMarks').value;
     var passMarks=document.getElementById('passMarks').value;
+    var quizKey=document.getElementById('quizKey').value;
 
 
     if(quizName!='' && quizTitle!='' && quizKey!='' && quizDetails!=''  && ttlTime!='' && ttlQues!='' && ttlMarks!='' && passMarks!='' && quizName!=undefined && quizTitle!=undefined && quizKey!=undefined && quizDetails!=undefined && ttlTime!=undefined && ttlQues!=undefined && ttlMarks!=undefined && passMarks!=undefined){
@@ -261,6 +297,9 @@ function cancelQuiz(){
 
 
 function submitQuesFun(){
+
+    var eqArr=[];
+
 var quizName=document.getElementById('qName').value;
 var quizTitle=document.getElementById('qTitle').value;
 var ques=document.getElementById('ques').value;
@@ -283,20 +322,46 @@ let quesObj={
 }
 
 firebase.database().ref(`allQuizes/${quizName}/${quizTitle}/allQues/`)
-.push(quesObj)
-.then((success)=>{
-  document.getElementById('qName').value='';
-document.getElementById('qTitle').value='';
-document.getElementById('ques').value='';
-document.getElementById('op1').value='';
-document.getElementById('op2').value='';
-document.getElementById('op3').value='';
-document.getElementById('op4').value='';
-document.getElementById('ansReal').value='';
-}) 
-.catch((error)=>{
-alert(error)
+.once('value',(data)=>{
+    var existQuiz=data.val();
+    for(var key in existQuiz){
+        eqArr.push(existQuiz[key])
+}
+
+  
+firebase.database().ref(`allQuizes/${quizName}/${quizTitle}/`)
+.once('value',(data)=>{
+
+var quizObj=data.val();
+
+if(eqArr.length<quizObj.ttlQues){
+    
+            firebase.database().ref(`allQuizes/${quizName}/${quizTitle}/allQues/`)
+        .push(quesObj)
+        .then((success)=>{
+        document.getElementById('qName').value='';
+        document.getElementById('qTitle').value='';
+        document.getElementById('ques').value='';
+        document.getElementById('op1').value='';
+        document.getElementById('op2').value='';
+        document.getElementById('op3').value='';
+        document.getElementById('op4').value='';
+        document.getElementById('ansReal').value='';
+        }) 
+        .catch((error)=>{
+        alert(error)
+        })
+}
+
+else{
+    alert('You Have Inserted All Questions !!')
+}
+
 })
+})
+
+
+
 
 }
 else{

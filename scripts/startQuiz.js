@@ -58,8 +58,34 @@ var a=0
 
     var ans=(a/quesArray.length)*100
     console.log( Math.round(ans)+'%')
+    var userResult=Math.round(ans)+'%';
+
     localStorage.setItem('currentUserPrtg',ans)
-            location.href='../pages/userResult.html'
+            var userUid=localStorage.getItem('currentUserUid')
+            let userMarks={
+              userResult,
+            }
+            var qName=localStorage.getItem('qName')
+           var qTitle=localStorage.getItem('qTitle')
+          
+           firebase.database().ref(`allQuizes/${qName}/${qTitle}/allUsers/${userUid}`)
+           .push(userMarks).then((success)=>{
+
+           })
+           .catch((error)=>{
+             alert(error.message)
+           })  
+
+
+
+           firebase.database().ref(`allusers/${userUid}/allQuiz/${qTitle}/`)
+           .push(userMarks).then((success)=>{
+
+             location.href='../pages/userResult.html'                
+           })
+           .catch((error)=>{
+             alert(error.message)
+           })  
           
 
 
@@ -106,6 +132,8 @@ var a=0
      var qTitle=localStorage.getItem('qTitle');
 var timeDiv=document.getElementById('timeDiv');
 
+
+
     firebase.database().ref(`allQuizes/${qName}/${qTitle}/allQues/`)
      .once('value',(data)=>{
          var allQues=data.val();
@@ -149,8 +177,29 @@ var timeDiv=document.getElementById('timeDiv');
                           
                               var ans=(a/quesArray.length)*100
                               console.log( Math.round(ans)+'%')
+                              var userResult=Math.round(ans)+'%';
                               localStorage.setItem('currentUserPrtg',ans)
-                                      location.href='../pages/userResult.html'                
+                    var userUid=localStorage.getItem('currentUserUid')
+                  let userMarks={
+                    userResult,
+                  }
+
+                  firebase.database().ref(`allQuizes/${qName}/${qTitle}/allUsers/${userUid}`)
+                  .push(userMarks).then((success)=>{
+       
+                  })
+                  .catch((error)=>{
+                    alert(error.message)
+                  })
+
+                 firebase.database().ref(`allusers/${userUid}/allQuiz/${qTitle}/`)
+                 .push(userMarks).then((success)=>{
+
+                   location.href='../pages/userResult.html'                
+                 })
+                 .catch((error)=>{
+                   alert(error.message)
+                 })    
                             },tOut)
                   
                   
