@@ -23,7 +23,7 @@ var config = {
             quizesTable.innerHTML+=
       `
       <tr>
-          <td style="font-size:1.5em;">
+          <td style="font-size:1.7em;">
           ${key}
 
           </td>
@@ -35,8 +35,8 @@ var config = {
         quizesTable.innerHTML+=
           `
       <tr>
-          <td>
-              <button   class='btn btn-warning' onclick='userGivenQuiz("${key}","${key2}")'>${key2}</button>
+          <td  style="text-align:center">
+              <button   class='btn btn-warning' style="font-size:1.3em" onclick='userGivenQuiz("${key}","${key2}")'>${key2}</button>
           </td>
       </tr>
       `
@@ -83,10 +83,10 @@ userInfoDiv.innerHTML=''
           userInfoDiv.innerHTML+=
           `
           
-          <div class="userInfo">
-              <p><span class="bold">Name:</span> ${userInfoObj.displayName}</p>
-              <p><span class="bold">Email:</span> ${userInfoObj.email}</p>
-                <p><span class="bold">Marks:</span> ${g}</p>
+          <div class="userInfo" style="box-shadow:">
+              <p style="font-size:1.3em"> <span class="bold" style="font-size:1.4em !important">Name:</span> ${userInfoObj.displayName}</p>
+              <p style="font-size:1.3em"><span class="bold" style="font-size:1.4em !important">Email:</span> ${userInfoObj.email}</p>
+                <p style="font-size:1.3em"><span class="bold" style="font-size:1.4em !important">Marks:</span> ${g}</p>
 
 
             

@@ -50,9 +50,12 @@ function loadFun(){
             quizesTable.innerHTML+=
             `
         <tr>
-            <td>
-                <button onclick='quizTitleFun("${key}","${key2}")'>${key2}</button>
-            </td>
+            <td style="text-align:center">
+                <button class="btn btn-warning" style="font-size:1.2em" onclick='quizTitleFun("${key}","${key2}")'>${key2}</button>
+           <br>
+            
+           </td>
+           <br>
         </tr>
         `
 
@@ -202,22 +205,24 @@ firebase.database().ref(`allQuizes/${pkey}/${ckey}/allQues/`)
         showAllQuesDiv.innerHTML+=
         `
        
-        <div>
+        <div style="box-shadow:0px 0px 10px grey">
         
         
-        <p>${allQuesObj[key].ques}</p>
-        <p>${allQuesObj[key].ansReal}</p>
-        <p>${allQuesObj[key].op1}</p>
-        <p>${allQuesObj[key].op2}</p>
-        <p>${allQuesObj[key].op3}</p>
-        <p>${allQuesObj[key].op4}</p>
+        <p>Question : ${allQuesObj[key].ques}</p>
+        <p>Option 1 : ${allQuesObj[key].ansReal}</p>
+        <p>Option 2 : ${allQuesObj[key].op1}</p>
+        <p>Option 3 : ${allQuesObj[key].op2}</p>
+        <p>Option 4 : ${allQuesObj[key].op3}</p>
+        <p>Answer :  ${allQuesObj[key].op4}</p>
 
-         </div>
-         <br>
-         <button class="btn btn-danger" onclick='delQuizFun("${pkey}","${ckey}","${key}")'>Delete</button>
-         <button class="btn btn-warning" onclick='showUpdateForm("${pkey}","${ckey}","${key}")'>Update</button>
-        
         <br>
+        <div style="text-align:center">
+        <button class="btn btn-danger" onclick='delQuizFun("${pkey}","${ckey}","${key}")'>Delete</button>
+        <button class="btn btn-warning" onclick='showUpdateForm("${pkey}","${ckey}","${key}")'>Update</button>
+        </div>
+        <br>
+        </div>
+       <br>
         `
     }
 })

@@ -49,7 +49,7 @@
                     <button class="btn btn-danger" onclick="location.reload()"> Back To Min Menu</button>
                 </div>
 
-                <div class="col-md-8" id="showAllQuesDiv">
+                <div class="col-md-6 col-md-offset-1" id="showAllQuesDiv">
 
                 </div>
 
@@ -107,6 +107,7 @@
                                        
                                         <br>
                                         <div class="col-md-12 col-sm-12 col-xs-12 text-center">
+
                                             <button class="btn btn-success" id="UPsubmitQuesBtn"  onclick="updateQuizFun()">Update</button>
                                             <button class="btn btn-danger" id="hideQuesBtn"  onclick="UPhideQuesFormFun()">Cancel</button>
 
@@ -136,11 +137,11 @@
 
             <div class="col-md-12">
                     <div class="col-md-8 col-md-offset-2 text-center heading">
-                            <h2>Quiz App Admin</h2>
+                            <h1 class="col-md-11">Quiz App Admin</h1>
 
-                        </div>
-                        <div class="col-md-12" style="text-align:right">
-                            <button class="btn btn-success" id="newQuizId" onclick="showDiv()">Create New Quiz</button>
+                            <div class="col-md-1" style="text-align:right;margin-top:10px;">
+                                <button class="btn btn-success" id="newQuizId" onclick="showDiv()">Create New Quiz</button>
+                            </div>
                         </div>
 
 
@@ -210,12 +211,14 @@
                                    
                                   </div>
 
-                        <div class="col-md-3" id="qTableDiv" >
+                        <div class="col-md-3" id="qTableDiv" style="padding:10px;box-shadow:0px 0px 10px grey;height:500px;overflow: scroll;" >
+                            <h1>All Quizes</h1>
                                 <table id="quizesTable"  class="col-md-12">
                 
                                 </table>
                                                
                             </div>
+                    
                           
 
                             <div class="col-md-9 " id="quizInfoMain">
@@ -224,7 +227,7 @@
 
                                 </div>
                             
-                                <div  id="addQuizDiv" class="col-md-6">
+                                <div  id="addQuizDiv" class="col-md-6" style="padding:10px;box-shadow:0px 0px 10px grey;height:500px;overflow: scroll;">
                                     <div style="text-align:right" style="margin-top:20px" id="addQuesBtn" >
 
                                         <button class="btn btn-success" onclick="showAddQues()">Add Questions </button>

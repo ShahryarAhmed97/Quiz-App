@@ -98,20 +98,21 @@ var a=0
         
                 mainDiv.innerHTML+=
                 `  
-                <div class="col-md-10">
+                <div class="col-md-10" >
                 <table>
-                <tr> <th>Question :${ite+1}</th><th> ${quesArray[ite].ques}</th>  </tr>
-                <tr>  <th  ><input type="radio" name="${ite}" value='${quesArray[ite].op1}' ></th><td> ${quesArray[ite].op1}</td>  </tr>
-                <tr> <th><input type="radio" name="${ite}" value='${quesArray[ite].op2}'></th><td>${quesArray[ite].op2} </td>  </tr>
-                <tr> <th><input type="radio" name="${ite}"  value='${quesArray[ite].op3}'></th><td> ${quesArray[ite].op3}</td>  </tr>
-                <tr> <th><input type="radio" name="${ite}" value='${quesArray[ite].op4}'></th><td> ${quesArray[ite].op4}</td>  </tr>
+                <tr> <th style="font-size:1.2em">Question :${ite+1} &nbsp; ${quesArray[ite].ques}</th>  </tr>
+                <tr>  <td style="font-size:1.2em"><input type="radio" name="${ite}" value='${quesArray[ite].op1}'>&nbsp;&nbsp;${quesArray[ite].op1}</td>  </tr>
+                <tr> <td style="font-size:1.2em"><input type="radio" name="${ite}" value='${quesArray[ite].op2}'>&nbsp;&nbsp;${quesArray[ite].op2} </td>  </tr>
+                <tr> <td style="font-size:1.2em"><input type="radio" name="${ite}"  value='${quesArray[ite].op3}'>&nbsp;&nbsp;${quesArray[ite].op3}</td>  </tr>
+                <tr> <td style="font-size:1.2em"><input type="radio" name="${ite}" value='${quesArray[ite].op4}'>&nbsp;&nbsp;${quesArray[ite].op4}</td>  </tr>
                 </table>
                 <br>
+                <button class="btn btn-success" onclick="checkArrFun('${ite}')"> Next </button>
+
                 <br>
                 </div>
              <div>
 
-             <button class="btn" onclick="checkArrFun('${ite}')">Next</button>
              </div>
                 
 
@@ -149,12 +150,12 @@ var timeDiv=document.getElementById('timeDiv');
               
 
                 var t=quizObj.ttlTime
-                timeDiv.innerHTML= t;
+                timeDiv.innerHTML= t +': Minuts';
 
             var interT=1000*60;
                 setInterval(()=>{
                   t--;
-                  timeDiv.innerHTML= t;
+                  timeDiv.innerHTML= t+': Minuts' ;
                             },interT)
                             
                             var tOut=quizObj.ttlTime*1000*60;

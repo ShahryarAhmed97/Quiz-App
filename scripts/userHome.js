@@ -31,6 +31,7 @@ document.getElementById('userHead').innerHTML="Welcome "+currentUserName+" !";
         `
         <div>
         <button class="btn btn-warning" id="showSubBtn" onclick='showSubQuizes("${key}")'>${key}</button>
+       <br>
         </div>
         `
 
@@ -51,6 +52,7 @@ function showSubQuizes(qName){
       subQuizesDiv.innerHTML+=
         `
         <div >
+
         <button class="btn btn-warning" id="showSubOptions" style="margin-top:5px !important;"  onclick='showSubQuizDetails("${qName}","${key}")'>${key}</button>
         </div>
         <br>
@@ -76,7 +78,10 @@ function showSubQuizDetails(qName,qTitle){
       quizDetailsDiv.innerHTML+=
         
         `
-        <div class="col-md-10">
+
+        <div class="col-md-6 col-md-offset-3">
+        <h1>Quiz Details</h1>
+<br>
         <table>
         <tr> <th>Quiz Name</th><td> ${allQuizNames.quizName}</td>  </tr>
         <tr>  <th>Quiz Title</th><td> ${allQuizNames.quizTitle}</td>  </tr>
