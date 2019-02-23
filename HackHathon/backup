@@ -1,0 +1,164 @@
+function contactIdFun(email,key){
+    document.getElementById('msg').value="";
+      var userUid=email
+      console.log(userUid,recieverId)
+      
+      var recieverId=key;
+      
+  
+    var msgsViewDiv2=document.getElementById('msgsViewDiv2');
+    //    document.getElementById('recieverId').value=recieverEmail;
+   var allMsgs=[];
+   var msgRef;
+  
+    
+    
+       firebase.database().ref('allChats/frndsChats/'+userUid+recieverId)
+  
+       .on('value',(data)=>{
+         var msgsData=data.val();
+  console.log(msgsData)
+       
+         msgsViewDiv2.innerHTML="";
+         for(var key in msgsData){
+  
+               console.log(msgsData[key]["sender"])
+    if(msgsData[key].sender==undefined){
+    //   msgsData[key].currentUserData=recieverEmail;
+    }
+    
+            // if(msgsData[key].currentUserName==currentUserName){
+                if(msgsData[key]["sender"]==="sender"){
+              msgsViewDiv2.innerHTML+=
+              `
+              <div style="text-align:right;">
+              <table   style='margin-left:400px;text-align:right !important;overflow-wrap: break-word;padding:10px;border-radius:10px;box-shadow:0px 0px 20px grey;'>
+              <tr  style='padding:10px;margin-left:300px;'>
+              <td style='font-size:1.3em;padding:10px;overflow-wrap: break-word;width:100px !important ;' ><p  style='width:300px !important ;overflow-wrap: break-word;'>${msgsData[key].msg}</p> </td>
+              
+              </tr>
+              
+              <tr style='margin-left:300px;text-align:right; color:grey;border-top:2px solid lightgrey;padding:10px;'>
+              <td style='padding:10px;'>${msgsData[key].tStamp}&nbsp;&nbsp;&nbsp; ${'salam'} </td>
+              </tr>
+              
+              </table>
+              <br><br>
+              </div>
+              `
+              
+                }
+  
+            else if(msgsData[key]["sender"]==="receiver"){
+  
+              msgsViewDiv2.innerHTML+=
+              `
+              <table   style='overflow-wrap: break-word;padding:10px;border-radius:10px;box-shadow:0px 0px 20px grey;'>
+              <tr  style='padding:10px;'>
+              <td style='font-size:1.3em;padding:10px;overflow-wrap: break-word;width:100px !important ;' ><p  style='width:300px !important ;overflow-wrap: break-word;'>${msgsData[key].msg}</p> </td>
+              
+              </tr>
+              
+              <tr style='text-align:right; color:grey;border-top:2px solid lightgrey;padding:10px;'>
+              <td style='padding:10px;'>${msgsData[key].tStamp}&nbsp;&nbsp;&nbsp; wiki </td>
+              </tr>
+              
+              </table>
+              <br><br>
+              `
+            }
+          
+           
+          
+         }
+  
+  
+    
+       })
+  
+  
+      
+      //  setInterval(updateScroll,1000);
+  
+    
+    
+    }
+    
+
+
+function sendFun(){
+
+    var msg=document.getElementById('msg').value;
+    console.log(msg);
+    var userUid=JSON.parse( localStorage.getItem('userid'));
+    var recieverId=u_k;
+    
+    
+    
+    var today = new Date();
+    var tStamp=today.toUTCString();
+      let userMsg={
+      msg,
+      tStamp,
+      
+      
+  
+    }
+  
+  
+   firebase.database().ref('allChats/frndsChats/'+userUid+recieverId)
+    .push({ msg,
+        tStamp,
+    sender:"sender"})
+    .then((success)=>{
+        contactIdFun(userUid,recieverId)
+  
+  
+  
+    })
+    .catch((error)=>{
+  
+    });
+  
+  
+    firebase.database().ref('allChats/frndsChats/'+recieverId+userUid)
+    .push({ msg,
+        tStamp,
+    sender:"receiver"})
+    .then((success)=>{
+      contactIdFun(userUid,recieverId)
+  
+  
+  
+    })
+    .catch((error)=>{
+        console.log(error)
+    });
+  
+  
+  
+  
+  }
+  
+  
+  contactIdFun(JSON.parse( localStorage.getItem('userid')),u_k)
+    
+//   function logOutFun(){
+    
+    
+//     firebase.auth().signOut()
+//     .then(function() {
+//    localStorage.setItem('currentUserUid',null)
+//    localStorage.setItem('recieverId',null)
+//     localStorage.setItem('recieverEmail',null)
+//     localStorage.setItem('currentUserData',null);
+//     localStorage.setItem('fbUser',null);
+  
+  
+  
+  
+//    location.href="../pages/logIn.html"
+//     }).catch(function(error) {
+//      alert(error.message)
+//     });    
+//   }

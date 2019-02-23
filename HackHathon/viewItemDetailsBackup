@@ -1,0 +1,444 @@
+ // Initialize Firebase
+ var config = {
+    apiKey: "AIzaSyB2JfRh7LHzqBC0SIE_WMJlHKzdOfSwQiQ",
+    authDomain: "olx-shary.firebaseapp.com",
+    databaseURL: "https://olx-shary.firebaseio.com",
+    projectId: "olx-shary",
+    storageBucket: "olx-shary.appspot.com",
+    messagingSenderId: "110049738985"
+  };
+  firebase.initializeApp(config);
+
+
+  function loadFun(){
+ var userUid=localStorage.getItem('currentUserUid')
+
+    var mainDiv=document.getElementById('mainDiv')
+      var keys=localStorage.getItem('keysObj');
+      var keysObj=JSON.parse(keys)
+
+
+      if(keysObj.key2==userUid){
+
+
+      }
+     firebase.database().ref(`allusers/${keysObj.key2}/`)
+     .once("value",(data)=>{
+         var userDetails=data.val();
+
+         console.log(userDetails)
+         localStorage.setItem('adUploaderUser',JSON.stringify(userDetails))
+         userDiv.innerHTML+=
+         
+         `
+         <div class="col-md-6" style='border: 2px solid white'>
+     
+       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       <div class="col-md-8">
+          <div class="userInfo">
+              <p><span class="bold">Name:</span> ${userDetails.userName}</p>
+              <p><span class="bold">Price:</span> ${userDetails.email}</p>
+<button class="btn btn-success" onclick=" contactIdFun('${userDetails.email},'${userDetails.userUid}')"></button>
+           
+                  
+          </div>
+       </div>
+       </div>
+       
+       <br><br><br>
+       
+       `
+       
+         
+
+     })
+
+
+
+
+      firebase.database().ref(`allCategories/${keysObj.key}/${keysObj.key2}/${keysObj.key3}/`)
+      .once("value",(data)=>{
+          var itemObj=data.val();
+          console.log(itemObj)
+
+
+
+     
+
+mainDiv.innerHTML+=
+
+                    `
+  <div class="col-md-6" style='border: 2px solid white'>
+<div class="col-md-4 text-center">
+   <img src="${itemObj.itemImg}" class="imgMargin" alt="profilepic" id="profilepic" style="height:150px;">
+  
+   </div>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<div class="col-md-8">
+   <div class="userInfo">
+       <p><span class="bold">Name:</span> ${itemObj.itemName}</p>
+       <p><span class="bold">Price:</span> ${itemObj.itemPrice}</p>
+       <p><span class="bold">Model:</span> ${itemObj.model}</p>
+       <p
+       <p><span class="bold">Year:</span> ${itemObj.year}</p>
+       <p><span class="bold">Category:</span> ${itemObj.category}</p>
+       <p><span class="bold">Description:</span> ${itemObj.itemDesc}</p>
+           
+   </div>
+</div>
+</div>
+
+<br><br><br>
+
+`
+
+    })
+  }
+
+
+
+  function logOutFun(){
+  
+  
+    firebase.auth().signOut()
+    .then(function() {
+   localStorage.setItem('currentUserUid',null)
+   localStorage.setItem('recieverId',null)
+    localStorage.setItem('recieverEmail',null)
+    localStorage.setItem('currentUserData',null);
+  
+  
+  
+  
+   location.href="../index.html"
+    }).catch(function(error) {
+     alert(error.message)
+    });    
+  }
+
+
+    
+//   function logOutFun(){
+    
+    
+//     firebase.auth().signOut()
+//     .then(function() {
+//    localStorage.setItem('currentUserUid',null)
+//    localStorage.setItem('recieverId',null)
+//     localStorage.setItem('recieverEmail',null)
+//     localStorage.setItem('currentUserData',null);
+//     localStorage.setItem('fbUser',null);
+  
+  
+  
+  
+//    location.href="../pages/logIn.html"
+//     }).catch(function(error) {
+//      alert(error.message)
+//     });    
+//   }
+
+
+
+
+function showMsgDiv(){
+  var homeDiv=document.getElementById('homeDiv');
+  homeDiv.style.display='block'
+
+  
+  var userUid=localStorage.getItem('currentUserUid')
+  var allKeys=localStorage.getItem('keysObj');
+  var keysObj=JSON.parse(allKeys);
+  
+var exContacts=[]
+
+
+  if(keysObj.key2!=userUid){
+
+        firebase.database().ref(`allCategories/${keysObj.key}/${keysObj.key2}/${keysObj.key3}/contactsOnAd/${userUid}/`)
+        .once('value',(data)=>{
+          var allContactsInAd=data.val();
+
+          for(var key in allContactsInAd){
+
+          exContacts.push(allContactsInAd[key])
+          console.log(allContactsInAd[key])
+          }
+          if(exContacts.includes(keysObj.key2)===false){
+          console.log("2nd console",exContacts.includes(keysObj.key2)===false)
+          
+         
+            firebase.database().ref(`allCategories/${keysObj.key}/${keysObj.key2}/${keysObj.key3}/contactsOnAd/${userUid}/`)
+            .push(keysObj.key2)
+            .then((success)=>{
+          // console.log(success)
+            })
+            .catch((error)=>{
+          alert(error)
+            })
+
+
+            firebase.database().ref(`allCategories/${keysObj.key}/${keysObj.key2}/${keysObj.key3}/contactsOnAd/${keysObj.key2}/`)
+            .push(userUid)
+            .then((success)=>{
+              console.log(success)
+            })
+            .catch((error)=>{
+              alert(error)
+
+            })
+
+
+          
+        }
+
+          
+       })   
+       
+
+
+   firebase.database().ref(`allCategories/${keysObj.key}/${keysObj.key2}/${keysObj.key3}/contactsOnAd/${userUid}/`)
+   .on("value",(data)=>{
+      var allContsOnAd=data.val();
+var adUploaderUser=localStorage.getItem('adUploaderUser');
+var adUploaderUserObj=JSON.parse(adUploaderUser);
+    var allContacts=document.getElementById('allContacts');
+    allContacts.innerHTML=""
+
+for(var key in allContsOnAd){
+
+  allContacts.innerHTML+=
+  `
+  
+  <tr>
+  <td><img src="" alt="users" height="70px" width="70px" class="userImg">
+  <button class='btn btn-success' style="width:200px; font-size:1.3em;background-color:transparent;color:green" onclick='contactIdFun("${adUploaderUserObj.email}","${adUploaderUserObj.userUid}")'>${adUploaderUserObj.userName}</button>
+  </td>
+  </tr>
+  `
+}
+  
+})
+
+
+
+        
+
+
+ }
+  else{
+
+    alert('You have iploaded This AD')
+    firebase.database().ref(`allCategories/${keysObj.key}/${keysObj.key2}/${keysObj.key3}/contactsOnAd/${userUid}/`)
+    .on("value",(data)=>{
+       var allContsOnAd=data.val();
+ var adUploaderUser=localStorage.getItem('adUploaderUser');
+ var adUploaderUserObj=JSON.parse(adUploaderUser);
+     var allContacts=document.getElementById('allContacts');
+     allContacts.innerHTML=""
+ 
+ for(var key in allContsOnAd){
+ 
+   allContacts.innerHTML+=
+   `
+   
+   <tr>
+   <td><img src="" alt="users" height="70px" width="70px" class="userImg">
+   <button class='btn btn-success' style="width:200px; font-size:1.3em;background-color:transparent;color:green" onclick='contactIdFun("${adUploaderUserObj.email}","${adUploaderUserObj.userUid}")'>${adUploaderUserObj.userName}</button>
+   </td>
+   </tr>
+   `
+ }
+   
+ })
+ 
+  }
+  
+
+}
+
+
+
+
+
+function contactIdFun(email,key){
+  document.getElementById('msg').value="";
+    var userUid=localStorage.getItem('currentUserUid');
+    var currentUserName=localStorage.getItem('currentUserName')
+    var recieverEmail=email;
+    var recieverId=key;
+    localStorage.setItem('recieverId',key)
+    localStorage.setItem('recieverEmail',email)
+
+  var msgsViewDiv2=document.getElementById('msgsViewDiv2');
+     document.getElementById('recieverId').value=recieverEmail;
+ var allMsgs=[];
+
+ var allKeys=localStorage.getItem('keysObj');
+  var keysObj=JSON.parse(allKeys);
+
+  
+  
+     firebase.database().ref(`allCategories/${keysObj.key}/${keysObj.key2}/${keysObj.key3}/chatsOnAd/${userUid+keysObj.key2}/`)
+
+     .on('value',(data)=>{
+       var msgsData=data.val();
+
+     var recName=localStorage.getItem('recieverEmail')
+       msgsViewDiv2.innerHTML="";
+       for(var key in msgsData){
+
+             
+  if(msgsData[key].currentUserData==undefined){
+    msgsData[key].currentUserData=recieverEmail;
+  }
+  console.log(userUid)
+          if(msgsData[key].currentUserName==currentUserName){
+            msgsViewDiv2.innerHTML+=
+            `
+            <div style="text-align:right;">
+            <table   style='margin-left:400px;text-align:right !important;overflow-wrap: break-word;padding:10px;border-radius:10px;box-shadow:0px 0px 20px grey;'>
+            <tr  style='padding:10px;margin-left:300px;'>
+            <td style='font-size:1.3em;padding:10px;overflow-wrap: break-word;width:100px !important ;' ><p  style='width:300px !important ;overflow-wrap: break-word;'>${msgsData[key].msg}</p> </td>
+            
+            </tr>
+            
+            <tr style='margin-left:300px;text-align:right; color:grey;border-top:2px solid lightgrey;padding:10px;'>
+            <td style='padding:10px;'>${msgsData[key].tStamp}&nbsp;&nbsp;&nbsp; ${currentUserName} </td>
+            </tr>
+            
+            </table>
+            <br><br>
+            </div>
+            `
+            
+          }
+
+          else{
+
+            msgsViewDiv2.innerHTML+=
+            `
+            <table   style='overflow-wrap: break-word;padding:10px;border-radius:10px;box-shadow:0px 0px 20px grey;'>
+            <tr  style='padding:10px;'>
+            <td style='font-size:1.3em;padding:10px;overflow-wrap: break-word;width:100px !important ;' ><p  style='width:300px !important ;overflow-wrap: break-word;'>${msgsData[key].msg}</p> </td>
+            
+            </tr>
+            
+            <tr style='text-align:right; color:grey;border-top:2px solid lightgrey;padding:10px;'>
+            <td style='padding:10px;'>${msgsData[key].tStamp}&nbsp;&nbsp;&nbsp; ${recName} </td>
+            </tr>
+            
+            </table>
+            <br><br>
+            `
+          }
+        
+         
+        
+       }
+
+
+  
+     })
+
+
+    
+    //  setInterval(updateScroll,1000);
+
+  
+  
+  }
+  
+
+
+
+
+  function sendFun(){
+
+    var msg=document.getElementById('msg').value;
+    var userUid=localStorage.getItem('currentUserUid');
+    var allKeys=localStorage.getItem('keysObj');
+     var keysObj=JSON.parse(allKeys);
+    var recieverId=localStorage.getItem('recieverId');
+    var recieverEmail=localStorage.getItem('recieverEmail');
+    var currentUserData=localStorage.getItem('currentUserData')
+    var currentUserName=localStorage.getItem('currentUserName')
+    console.log(currentUserData)
+    
+    var today = new Date();
+    var tStamp=today.toUTCString();
+      let userMsg={
+      msg,
+      tStamp,
+      currentUserData,
+      currentUserName,
+  
+    }
+  
+  
+   firebase.database().ref(`allCategories/${keysObj.key}/${keysObj.key2}/${keysObj.key3}/chatsOnAd/${userUid+keysObj.key2}/`)
+    .push(userMsg)
+    .then((success)=>{
+      contactIdFun(recieverEmail,recieverId)
+  
+  
+  
+    })
+    .catch((error)=>{
+  alert(error)
+    });
+  
+  
+    firebase.database().ref(`allCategories/${keysObj.key}/${keysObj.key2}/${keysObj.key3}/chatsOnAd/${keysObj.key2+userUid}/`)
+    .push(userMsg)
+    .then((success)=>{
+      contactIdFun(recieverEmail,recieverId)
+  
+  
+  
+    })
+    .catch((error)=>{
+  alert(error)
+    });
+  
+  
+  
+  
+  }
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

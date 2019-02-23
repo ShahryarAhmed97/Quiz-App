@@ -14,6 +14,10 @@
 
     <script>
 
+        function preventBack(){window.history.forward();}
+         setTimeout("preventBack()", 0);
+         window.onunload=function(){null};
+
 var config = {
     apiKey: "AIzaSyC2lA1bqe1ag37VU2WoGvQtrEsf71JqJUQ",
     authDomain: "quizapp-shary.firebaseapp.com",

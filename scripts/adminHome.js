@@ -119,6 +119,10 @@ quizInfo.innerHTML+=
 
 function updateQuizFun(pkey,ckey,key)
 {
+    console.log(pkey,ckey,key)
+   var keys= localStorage.getItem('updateQuesKeys')
+   var quesKeys=JSON.parse(keys)
+
     var  quizName=document.getElementById('UPqName').value;
 var quizTitle=document.getElementById('UPqTitle').value;
 var ques=document.getElementById('UPques').value;
@@ -142,7 +146,7 @@ if(quizName!='' && quizTitle!='' && ques!='' && op1!='' && op2!='' && op3!='' &&
         ansReal
     }
     
-    firebase.database().ref(`allQuizes/${pkey}/${ckey}/allQues/${key}`)
+    firebase.database().ref(`allQuizes/${quesKeys.pkey}/${quesKeys.ckey}/allQues/${quesKeys.key}`)
     .update(quesObj)
     .then((success)=>{
 
@@ -159,6 +163,15 @@ document.getElementById('updateQuizDiv').style.display='none'
 
 function showUpdateForm(pkey,ckey,key){
 document.getElementById('updateQuizDiv').style.display='block'
+let updateQuesKeys={
+    pkey,
+    ckey,
+    key
+}
+localStorage.setItem('updateQuesKeys',JSON.stringify(updateQuesKeys));
+
+//  updateQuizFun(pkey,ckey,key);
+
     
 
 }
@@ -171,6 +184,8 @@ function UPhideQuesFormFun(){
 
 function delQuizFun(pkey,ckey,key)
 {
+    console.log(pkey,ckey,key)
+
     firebase.database().ref(`allQuizes/${pkey}/${ckey}/allQues/${key}`).remove()
     .then((success)=>{
 

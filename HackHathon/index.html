@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://www.gstatic.com/firebasejs/5.8.2/firebase.js"></script>
+
+    <title>Quiz App</title>
+<link rel="stylesheet" href="./styleSheets/index.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+   <!-- <script type = "text/javascript" >
+        function preventBack(){window.history.forward();}
+         setTimeout("preventBack()", 0);
+         window.onunload=function(){null};
+     </script> -->
+</head>
+<body  onload="loadFun()">
+
+
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand my-color" href="./index.html" style="margin-left:20px;margin-top:-20px;"><img src="./icon/Icon.png" alt="" height="60px" width="60px"></a>
+                    </div>
+                    <div class="collapse navbar-collapse" id="myNavbar">
+                       
+                        <ul class="nav navbar-nav navbar-right">
+                                <!-- <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Page 1 <span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                      <li><a href="#">Page 1-1</a></li>
+                                      <li><a href="#">Page 1-2</a></li>
+                                      <li><a href="#">Page 1-3</a></li>
+                                    </ul>
+                                  </li> -->
+                                  <!-- <li><input type="search" id="search" class="form-control" name="search"> <button class="btn ">Search</button></li> -->
+
+                                  <div class="navbar-form navbar-left" >
+                                    <div class="form-group">
+                                      <input type="serach" style="width:400px;font-size:1.2em;padding: 5px;" class="form-control" id="search" placeholder="Search by AD" name="search">
+                                    </div>
+                                    <button class="btn btn-primary" onclick="searchAds()">Submit</button>
+                                    <button class="btn btn-info" onclick="location.reload()">Reset</button>
+
+                                </div>
+
+                               
+                               
+
+                                    <li id="signBtn"><a href="./pages/signUp.html"><span class="glyphicon glyphicon-user"></span> Sign Up </a></li>
+                                    <li id="logInBtn"><a href="./pages/logIn.html"><span class="glyphicon glyphicon-log-in"></span> Log in </a></li>
+                                  
+                                  
+      
+
+  
+            <li id="gBtn1" style="margin-left:20px;margin-top:9px;"> <button class="btn btn-success" onClick="createNewAdd()"> Create New Add</button></li>
+            <li id="gBtn2" style="margin-left:10px;margin-top:9px;">  <button class="btn btn-success" onClick="viewWishListFun()" >Wish lists</button></li>
+            
+            <li id="logOutBtn" ><a href="#" onclick="logOutFun()"><span class="glyphicon glyphicon-log-out"></span> Log out</a></li>
+          
+
+                    </ul>
+                    </div>
+                </div>
+            </nav>
+
+            <div id="homeImg"  class=" col-md-12"  style="margin-top:80px;">
+           <img src="./icon/home.PNG" alt="homeimg" height="400px" width="1350px">
+
+            </div>
+
+           
+
+            <div class="col-md-12" style="">
+
+                <table  class="col-md-12 " style=" box-shadow: 0px 0px 20px gray">
+                    <tr><h3> Search by Categories</h3></tr>
+                    <tr id="catsTable" style="">
+
+                    </tr>
+
+                 
+
+                </table>
+
+            </div>
+
+            <div class="col-md-12" style="height:20px;">
+
+            </div>
+
+            <div class="container">
+                <div class="row">
+            <div id="mainDiv">
+
+                </div>
+                </div>
+            </div>
+
+
+<!-- ye last slide wala hai  -->
+                <!-- <div class="container">
+                    <div class="row">
+                  
+                      <div class="col-xs-12 col-sm-6 col-md-4">
+                        <article class="card-wrapper">
+                          <div class="image-holder">
+                            <a href="#" class="image-holder__link"></a>
+                            <div class="image-liquid image-holder--original" style="background-image: url('https://upload.wikimedia.org/wikipedia/commons/2/24/Blue_Tshirt.jpg')">
+                            </div>
+                          </div>
+                  
+                          <div class="product-description"> -->
+                            <!-- title -->
+                            <!-- <h1 class="product-description__title">
+                              <a href="#">						
+                                Adidas Originals
+                                </a>
+                            </h1> -->
+                  
+                            <!-- category and price -->
+                            <!-- <div class="row">
+                              <div class="col-xs-12 col-sm-8 product-description__category secondary-text">
+                                Men's running shirt
+                              </div>
+                              <div class="col-xs-12 col-sm-4 product-description__price">
+                                € 499
+                              </div>
+                            </div> -->
+                  
+                            <!-- divider -->
+                            <!-- <hr /> -->
+                  
+                            <!-- sizes -->
+                          
+                  
+                            <!-- colors -->
+                           
+                          <!-- </div>
+                  
+                        </article>
+                      </div>
+
+                    </div>
+                    </div> -->
+               
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="./scripts/index.js"></script>
+
+            <script>
+                    window.addEventListener('load',()=> {
+                   
+                
+                    if ('serviceWorker' in navigator) {
+                        navigator.serviceWorker.register('./olx_sw.js')
+                            .then(() => {
+                                console.log('service worker')
+                            })
+                    }
+                })
+                    
+                    </script>
+            
+           
+    
+</body>
+
+
+
+
+
+</html>
+
+<!-- 
+
+ul.innerHTML += `<div class="col-lg-4 " style="overflow: auto;">
+        <div class="our-team-main">
+        
+        <div class="team-front">
+        <img src=${username[key][key1].img} class="img-fluid img" />
+        <h3 class="card_head">Ad Name: ${username[key][key1].name}</h3>
+        
+        
+        </div>
+        
+        <div class="team-back">
+        <span class="span_color">
+      <strong style="color:red">Email:</strong> ${
+          username[key].email1
+      }<p></p><strong style="color:red">Contact: </strong>${
+          username[key].contact
+                } <p></p><strong style="color:red">Address: </strong>${
+                  username[key].address
+                
+      }
+      <p></p>        <strong style="color:red">Ad model: </strong> ${
+        username[key][key1].model
+      }
+      <p></p>  <strong style="color:red" >Ad Category: </strong> </span>${
+          username[key][key1].cat1.substr(0,15)
+      }
+      
+                 <a key=${key} key1=${key1} class="btn btn-primary my-3 btn-block" style="color:white; " onClick="chat(this)"><strong>View Details</strong></a>
+        </span>
+        </div>
+        
+        </div>
+        </div>`;
+
+
+ -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+           
+
+</html>
+
+
+
